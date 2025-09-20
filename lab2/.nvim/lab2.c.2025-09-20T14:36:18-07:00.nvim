@@ -1,0 +1,52 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main() {
+  char *buff = NULL;
+  size_t size = 0;
+
+  while (1) {
+    printf("Enter programs to run.\n> ");
+
+    ssize_t num_char = getline(&buff, &size, stdin);
+
+    if (num_char == -1) {
+      printf("Getline failed.\n");
+      free(buff);
+      break;
+    }
+
+    if (buff[num_char - 1] == '\n') {
+      buff[num_char - 1] = '\0';
+    }
+
+    if (strlen(buff) == 0) {
+      continue;
+    }
+
+    pid_t pid = fork();
+
+    if (pid < 0) {
+      perror("fork");
+      free(buff);
+      exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+      execl(buff, buff, (char *)NULL);
+      printf("Execl failed.\n");
+
+      exit(EXIT_FAILURE);
+    } else {
+      int wstatus;
+      waitpid(pid, &wstatus, 0);
+    }
+
+    free(buff);
+  }
+
+  return 0;
+}
