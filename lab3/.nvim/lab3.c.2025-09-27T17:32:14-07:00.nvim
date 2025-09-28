@@ -1,0 +1,53 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+  char *input = NULL;
+  size_t size = 0;
+
+  char *arr[5];
+  for (int i = 0; i < 5; i++)
+    arr[i] = NULL;
+
+  int count = 0;
+  int next = 0;
+
+  while (1) {
+    printf("Enter input: ");
+    ssize_t nread = getline(&input, &size, stdin);
+
+    if (nread != -1L) {
+      if (input[nread - 1] == '\n')
+        input[nread - 1] = '\0';
+
+      char *temp = strdup(input);
+
+      if (arr[next] != NULL) {
+        free(arr[next]);
+      }
+
+      arr[next] = temp;
+      next = (next + 1) % 5;
+      if (count < 5)
+        count++;
+
+
+      if (strcmp(input, "print") == 0) {
+        int start = (next - count + 5) % 5;
+        for (int i = 0; i < count; i++) {
+          int index = (start + i) %5;
+          printf("%s\n", arr[index]);
+      }
+    }
+  }
+
+  for (int i = 0; i < 5; i++)
+    free(arr[i]);
+
+  free(input);
+
+  return 0;
+}
+}
