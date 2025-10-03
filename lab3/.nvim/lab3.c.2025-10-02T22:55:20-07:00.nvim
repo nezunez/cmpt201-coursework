@@ -19,7 +19,7 @@ int main() {
     ssize_t nread = getline(&input, &size, stdin);
 
     if (nread != -1L) {
-      input[nread - 1] = '\0';
+        input[nread - 1] = '\0';
       char *temp = strdup(input);
 
       if (arr[next] != NULL) {
