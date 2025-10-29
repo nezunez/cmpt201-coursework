@@ -107,7 +107,7 @@ void reduce(Output *output) {
   // Print the doubled number and line numbers
   printf("(%d, [", output->doubled_value);
   for (int i = 0; i < output->count; i++) {
-    printf("%d", output->line_numbers[i]);
+    printf("%d ", output->line_numbers[i]);
     if (i < output->count - 1)
       printf(", ");
   }
