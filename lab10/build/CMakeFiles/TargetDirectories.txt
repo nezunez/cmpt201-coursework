@@ -1,0 +1,4 @@
+/Users/nezunezu/cmpt201-coursework/lab10/build/CMakeFiles/server.dir
+/Users/nezunezu/cmpt201-coursework/lab10/build/CMakeFiles/client.dir
+/Users/nezunezu/cmpt201-coursework/lab10/build/CMakeFiles/edit_cache.dir
+/Users/nezunezu/cmpt201-coursework/lab10/build/CMakeFiles/rebuild_cache.dir
